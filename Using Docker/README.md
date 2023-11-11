@@ -67,10 +67,31 @@ RUN apt-get update && apt-get install -y cowsay fortune
 - docker build - создать образ, выполняется в том же каталоге, где расположен Dockerfile
 ```
 docker build -t test/cowsay-dockerfile .
-docker run t
-est/cowsay-dockerfile /usr/games/cowsay "Moo"
+docker run test/cowsay-dockerfile /usr/games/cowsay "Moo"
 ```
 - Инструкция ENTRYPOINT - позволяет определить выполняемый файл, который будет вызываться для обработки любых аргументов, переданных в команду docker run
 ```
 ENTRYPOINT ["/usr/games/cowsay"]
+
+docker build -t test/cowsay-dockerfile .
+docker run test/cowsay-dockerfile "Moo"
 ```
+Создадим скрипт для команды - /usr/games/fortune (если есть вводное значение - передаем его eсли нет то команду)
+```
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrtypoint.sh"]
+```
+- Инструкция COPY - копирует файл из файловой системы хоста в файловую систему образа, где первый аргумент определяет файл хоста, а второй – целевой путь
+
+## Работа с реестрами
+Реестры, репозитории, образы и теги
+Для хранения образов применяется иерархическая система.
+- реестр (registry) – сервис, отвечающий за хранение и распространение образов.
+- репозиторий (repository) – набор взаимосвязанных образов 
+- тег (tag) – алфавитно-цифровой идентификатор, присваиваемый образам внутри репозитория
+
+- docker login - вход в реестр Docker Hub
+- docker push имя/репозиторий - выгрузит образ
+- docker pull имя/репозиторий - загрузит образ
+- инструкцию MAINTAINER - информация, позволяющую связаться с автором данного образа
+
