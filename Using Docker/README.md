@@ -57,4 +57,20 @@ docker commit cowsay test/cowsayimage
 - docker commit "id or name" repositpry-name/image-name - превращения контейнера в образ, не имеет значения, работает контейнер или он остановлен
 
 ## Создание образов из файлов Dockerfile
-
+**Dockerfile** – это обычный текстовый файл, содержащий набор операций, которые могут быть использованы для создания Docker-образа.
+```
+FROM debian:wheezy
+RUN apt-get update && apt-get install -y cowsay fortune
+```
+- Инструкция FROM - определяет базовый образ ОС, является строго обязательной для всех файлов Dockerfile
+- Инструкции RUN определяют команды, выполняемые в командной оболочке внутри данного образа
+- docker build - создать образ, выполняется в том же каталоге, где расположен Dockerfile
+```
+docker build -t test/cowsay-dockerfile .
+docker run t
+est/cowsay-dockerfile /usr/games/cowsay "Moo"
+```
+- Инструкция ENTRYPOINT - позволяет определить выполняемый файл, который будет вызываться для обработки любых аргументов, переданных в команду docker run
+```
+ENTRYPOINT ["/usr/games/cowsay"]
+```
