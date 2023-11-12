@@ -1,0 +1,15 @@
+version: "3"
+services:
+  identidock:
+    image: jooos/avatar
+    expose:
+      - "9090"
+    environment:
+      ENV: PROD
+    links:
+      - dnmonster
+      - redis
+  dnmonster:
+    image: jooos/dnmonster
+  redis:
+    image: redis
