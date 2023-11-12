@@ -1,6 +1,6 @@
 version: "3"
 services:
-  identidock:
+  avatar:
     image: jooos/avatar
     expose:
       - "9090"
