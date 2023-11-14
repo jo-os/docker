@@ -288,3 +288,10 @@ docker run -e HIST_FILE=/root/.bash_history -v=$HOME/.bash_history:/root/.bash_h
 alias dockbash='docker run -e HIST_FILE=/root/.bash_history -v=$HOME/.bash_history:/root/.bash_history
 ```
 ## Контейнеры данных
+Хотите использовать внешний том внутри контейнера, но нужно, чтобы только Docker имел доступ к файлам.
+- Запустите контейнер данных и используйте флаг --volumes-from при запуске других контейнеров.
+```
+docker run -v /shared-data --name dc busybox touch /shared-data/somefile
+docker run -t -i --volumes-from dc busybox /bin/sh /
+```
+### Повседневное использование Docker
